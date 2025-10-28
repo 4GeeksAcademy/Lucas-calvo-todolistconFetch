@@ -67,9 +67,9 @@ const Home = () => {
 
 			<ul className="list-unstyled text-start list-group">
 				{lista.map((item) => (
-					<li className="list-group-item" key={item.id}>
-						{item.label}
-						<button onClick={() => eliminarTarea(item.id)}>❌</button>
+					<li className="list-group-item d-flex justify-content-between align-items-center" key={item.id}>
+						<span>{item.label}</span>
+						<button className="btn btn-light border-0" onClick={() => eliminarTarea(item.id)}>❌</button>
 					</li>
 				))}
 			</ul>
