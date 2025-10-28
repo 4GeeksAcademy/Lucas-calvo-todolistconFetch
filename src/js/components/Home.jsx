@@ -48,6 +48,15 @@ const Home = () => {
 			.catch(error => { console.log('Hubo un problema al eliminar tarea: \n', error) });
 	};
 
+	const eliminarTodas = () => {
+		fetch(API_URL + "/users/lucas", { method: "DELETE" })
+		.then(() => {
+			setLista([])
+			crearUsuario()
+		})
+		.catch(error => { console.log('Hubo un problema al eliminar todas las tareas: \n', error) });
+	}
+
 	useEffect(() => {
 		traerTareas();
 	}, []);
@@ -73,6 +82,8 @@ const Home = () => {
 					</li>
 				))}
 			</ul>
+
+			<button className="btn btn-danger mt-3" onClick={eliminarTodas}>Clear all tasks</button>
 		</div>
 	);
 };
