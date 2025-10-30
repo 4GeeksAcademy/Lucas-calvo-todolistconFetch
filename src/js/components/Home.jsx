@@ -14,17 +14,19 @@ const Home = () => {
 		})
 		.then(response => response.json())
 		.then((data) => console.log(data))
-		.catch(error => { console.log('Hubo un problema al obtener los personajes: \n', error) });
+		.catch(error => { console.log('Hubo un problema al crear el usuario: \n', error) });
 	};
 
 	const traerTareas = () => {
 		fetch(API_URL + "/users/lucas")
 			.then((response) => {
-				if(response.status === 404) crearUsuario();
+				if (response.status === 404) {
+					crearUsuario();
+				}
 				return response.json();
 			})
 			.then((data) => setLista(data.todos || []))
-			.catch(error => { console.log('Hubo un problema al obtener los personajes: \n', error) });
+			.catch(error => { console.log('Hubo un problema al traer las tareas: \n', error) });
 	};
 
 	const agregar = () => {
@@ -48,14 +50,12 @@ const Home = () => {
 			.catch(error => { console.log('Hubo un problema al eliminar tarea: \n', error) });
 	};
 
+	// 🔧 Faltaba esta función que se llama en el botón "Clear all tasks"
 	const eliminarTodas = () => {
 		fetch(API_URL + "/users/lucas", { method: "DELETE" })
-		.then(() => {
-			setLista([])
-			crearUsuario()
-		})
-		.catch(error => { console.log('Hubo un problema al eliminar todas las tareas: \n', error) });
-	}
+			.then(() => setLista([]))
+			.catch(error => { console.log('Hubo un problema al eliminar todas las tareas: \n', error) });
+	};
 
 	useEffect(() => {
 		traerTareas();
